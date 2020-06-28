@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>Xipixapa 360</title>
+    <link rel="icon" type="image/png" href="assets/brand/logo.png"/>
+
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
 
     <script src="https://unpkg.com/aframe-event-set-component@5/dist/aframe-event-set-component.min.js"></script>
@@ -32,75 +34,162 @@
     </script>
 </head>
 <body>
-
-<a-scene>
+<a-scene vr-mode-ui="enabled: false">
     <a-assets>
         <!--360 images (SKY)-->
-        <img id="casaPrincipal" crossorigin="anonymous" src="assets/casaPrincipal.jpg">
+        <img
+                id="casaPrincipal"
+                crossorigin="anonymous"
+                src="assets/casaPrincipal.jpg"
+        />
         <!--Clickable illustrations-->
-        <img id="sombrero-thumb" crossorigin="anonymous" src="assets/Ilustraciones/sombrero.png">
+        <img
+                id="sombrero-thumb"
+                crossorigin="anonymous"
+                src="assets/Ilustraciones/sombrero.png"
+        />
 
-
-        <img id="casaPrincipal-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-city.jpg">
-        <img id="cubes-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg">
-        <img id="sechelt-thumb" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-sechelt.jpg">
-        <audio id="click-sound" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
-        <img id="cubes" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/cubes.jpg">
-        <img id="sechelt" crossorigin="anonymous" src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg">
-
+        <img
+                id="casaPrincipal-thumb"
+                crossorigin="anonymous"
+                src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-city.jpg"
+        />
+        <img
+                id="cubes-thumb"
+                crossorigin="anonymous"
+                src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg"
+        />
+        <img
+                id="sechelt-thumb"
+                crossorigin="anonymous"
+                src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-sechelt.jpg"
+        />
+        <audio
+                id="click-sound"
+                crossorigin="anonymous"
+                src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"
+        ></audio>
+        <img
+                id="cubes"
+                crossorigin="anonymous"
+                src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/cubes.jpg"
+        />
+        <img
+                id="sechelt"
+                crossorigin="anonymous"
+                src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg"
+        />
     </a-assets>
 
     <!-- 360-degree image. -->
-    <a-sky id="image-360" radius="50" src="#casaPrincipal"
-           animation__fade="property: components.material.material.color; type: color; from: #FFF; to: #000; dur: 300; startEvents: fade"
-           animation__fadeback="property: components.material.material.color; type: color; from: #000; to: #FFF; dur: 300; startEvents: animationcomplete__fade"></a-sky>
+    <a-sky
+            id="image-360"
+            radius="50"
+            src="#casaPrincipal"
+            animation__fade="property: components.material.material.color; type: color; from: #FFF; to: #000; dur: 300; startEvents: fade"
+            animation__fadeback="property: components.material.material.color; type: color; from: #000; to: #FFF; dur: 300; startEvents: animationcomplete__fade"
+    ></a-sky>
 
     <!-- Image links. -->
-    <a-entity template="src: #link" data-src="#cubes" data-thumb="#sombrero-thumb"
-              position="4.8 -1.5 -0.5" rotation="0 -80 0" data-customw="1.5" data-customh="1.5"
-             ></a-entity>
+    <a-entity
+            template="src: #link"
+            data-src="#cubes"
+            data-thumb="#sombrero-thumb"
+            position="4.8 0 -0.5"
+            rotation="0 -80 0"
+            data-customw="1.5"
+            data-customh="1.5"
+    ></a-entity>
 
-<!--
-    <a-entity id="links" layout="type: line; margin: 1.5" position="0 -1 -4">
-        <a-entity template="src: #link" data-src="#cubes" data-thumb="#cubes-thumb"></a-entity>
-        <a-entity template="src: #link" data-src="#casaPrincipal" data-thumb="#casaPrincipal-thumb"></a-entity>
-        <a-entity template="src: #link" data-src="#sechelt" data-thumb="#sechelt-thumb"></a-entity>
-    </a-entity>
+    <a-entity
+            id="myEnterVRButton"
+            onclick="goIn()"
+            class="link"
+            geometry="primitive: circle; radius: 0.06;"
+            material="color: blue"
+            position="0.5 1.5 -1.5"
+    ></a-entity>
+
+    <a-entity
+            id="myEnterARButton"
+            onclick="goOut()"
+            class="link"
+            geometry="primitive: circle; radius: 0.06;"
+            material="color: pink"
+            position="1 1.5 -1.5"
+    ></a-entity>
+
+    <h1
+            id="myEnterVRButton"
+            onclick="goIn()"
+            style="position: fixed; top: 10px;z-index: 99999999999999999999;"
+    >
+        VR
+    </h1>
+    <a id="myEnterARButton" href="#"></a>
+
+    <!--
+  <a-entity id="links" layout="type: line; margin: 1.5" position="0 -1 -4">
+      <a-entity template="src: #link" data-src="#cubes" data-thumb="#cubes-thumb"></a-entity>
+      <a-entity template="src: #link" data-src="#casaPrincipal" data-thumb="#casaPrincipal-thumb"></a-entity>
+      <a-entity template="src: #link" data-src="#sechelt" data-thumb="#sechelt-thumb"></a-entity>
+  </a-entity>
 -->
 
     <!-- Camera + cursor. -->
-    <a-entity camera look-controls>
-      <!--  <a-cursor
-                id="cursor"
-                cursor="fuse: true; fuseTimeout: 1500"
-                color="white"
-                geometry="primitive: ring; radiusOuter: 0.06; radiusInner: 0.05; thetaLength: 360; thetaStart: 90;"
-                animation__fusing="property: geometry.thetaLength; startEvents: fusing; dur: 1500; from: 0; to: 360; pauseEvents: mouseleave"
-                event-set__mouseenter="_event: mouseenter; color: #ffc107"
-                event-set__mouseleave="_event: mouseleave; color: white; geometry.thetaLength: 360"
-                raycaster="objects: .link"></a-cursor>-->
-        <a-cursor
-                id="cursor"
-                cursor="fuse: true; fuseTimeout: 1500"
-                color="white"
-                geometry="primitive: circle; radius: 0.06;"
-                material="src: assets/icons/cursor.png"
-                animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 1500; from: 1 1 1; to: 0.1 0.1 0.1; pauseEvents: mouseleave"
-                animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.1 0.1 0.1; to: 1 1 1"
-                event-set__mouseenter="_event: mouseenter; color: #ffc107;"
-                event-set__mouseleave="_event: mouseleave; color: white; scale: 1 1 1"
-                raycaster="objects: .link"></a-cursor><!--raycaster="objects: .link"
-                  animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"-->
+    <a-entity id="rig" position="0 0 0">
+        <a-entity camera look-controls position="0 1.6 0" id="camera">
+            <!--  <a-cursor
+                    id="cursor"
+                    cursor="fuse: true; fuseTimeout: 1500"
+                    color="white"
+                    geometry="primitive: ring; radiusOuter: 0.06; radiusInner: 0.05; thetaLength: 360; thetaStart: 90;"
+                    animation__fusing="property: geometry.thetaLength; startEvents: fusing; dur: 1500; from: 0; to: 360; pauseEvents: mouseleave"
+                    event-set__mouseenter="_event: mouseenter; color: #ffc107"
+                    event-set__mouseleave="_event: mouseleave; color: white; geometry.thetaLength: 360"
+                    raycaster="objects: .link"></a-cursor>-->
+            <a-cursor
+                    id="cursor"
+                    cursor="fuse: true; fuseTimeout: 1500"
+                    color="white"
+                    geometry="primitive: circle; radius: 0.06;"
+                    material="src: assets/icons/cursor.png"
+                    animation__fusing="property: scale; startEvents: fusing; easing: easeInCubic; dur: 1500; from: 1 1 1; to: 0.1 0.1 0.1; pauseEvents: mouseleave"
+                    animation__click="property: scale; startEvents: click; easing: easeInCubic; dur: 150; from: 0.1 0.1 0.1; to: 1 1 1"
+                    event-set__mouseenter="_event: mouseenter; color: #ffc107;"
+                    event-set__mouseleave="_event: mouseleave; color: white; scale: 1 1 1"
+                    raycaster="objects: .link"
+            ></a-cursor
+            ><!--raycaster="objects: .link"
+                    animation__click="property: scale; startEvents: click; from: 0.1 0.1 0.1; to: 1 1 1; dur: 150"-->
+        </a-entity>
     </a-entity>
-
 </a-scene>
 
+<script>
+    var scene = document.querySelector("a-scene");
+    var camera = document.getElementById("camera");
+    console.log(camera);
+
+    function goIn() {
+        scene.enterVR();
+        console.log("VR mode is " + scene.is("vr-mode"));
+        document.querySelector("#camera").object3D.position.set(0, 1.6, 0);
+    }
+
+    function goOut() {
+        scene.exitVR();
+        console.log("VR mode is " + scene.is("vr-mode"));
+        document.querySelector("#camera").object3D.position.set(0, 1.6, 0);
+    }
+</script>
+
 <!--<a-scene>
-    <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-    <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-    <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
-    <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-    <a-sky color="#ECECEC"></a-sky>
+<a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+<a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
+<a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+<a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+<a-sky color="#ECECEC"></a-sky>
 </a-scene>-->
 </body>
 </html>
