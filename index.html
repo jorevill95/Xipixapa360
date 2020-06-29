@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Xipixapa 360</title>
-    <link rel="icon" type="image/png" href="assets/brand/logo.png"/>
+    <link rel="icon" type="image/png" href="assets/brand/logoMini.png"/>
 
     <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
 
@@ -11,6 +11,8 @@
     <script src="https://unpkg.com/aframe-layout-component@5.3.0/dist/aframe-layout-component.min.js"></script>
     <script src="https://unpkg.com/aframe-template-component@3.2.1/dist/aframe-template-component.min.js"></script>
     <script src="https://unpkg.com/aframe-proxy-event-component@2.1.0/dist/aframe-proxy-event-component.min.js"></script>
+
+    <link rel="stylesheet" href="styles/main.css"/>
 
     <!-- <a-entity class="link"
                      geometry="primitive: plane; height: 1; width: 1"
@@ -34,99 +36,67 @@
     </script>
 </head>
 <body>
+
+<img class="viewModeBtn" src="assets/icons/menu/1x/vrmode.png" onclick="goInVR()">
+
 <a-scene vr-mode-ui="enabled: false">
     <a-assets>
         <!--360 images (SKY)-->
-        <img
-                id="casaPrincipal"
-                crossorigin="anonymous"
-                src="assets/casaPrincipal.jpg"
-        />
+        <img id="casaPrincipal" crossorigin="anonymous" src="assets/casaPrincipal.jpg"/>
         <!--Clickable illustrations-->
-        <img
-                id="sombrero-thumb"
-                crossorigin="anonymous"
-                src="assets/Ilustraciones/sombrero.png"
-        />
+        <img id="sombrero-thumb" crossorigin="anonymous" src="assets/Ilustraciones/sombrero.png"/>
 
-        <img
-                id="casaPrincipal-thumb"
-                crossorigin="anonymous"
-                src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-city.jpg"
-        />
-        <img
-                id="cubes-thumb"
-                crossorigin="anonymous"
-                src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg"
-        />
-        <img
-                id="sechelt-thumb"
-                crossorigin="anonymous"
-                src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-sechelt.jpg"
-        />
-        <audio
-                id="click-sound"
-                crossorigin="anonymous"
-                src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"
-        ></audio>
-        <img
-                id="cubes"
-                crossorigin="anonymous"
-                src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/cubes.jpg"
-        />
-        <img
-                id="sechelt"
-                crossorigin="anonymous"
-                src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg"
-        />
+        <img id="casaPrincipal-thumb" crossorigin="anonymous"
+             src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-city.jpg"/>
+        <img id="cubes-thumb" crossorigin="anonymous"
+             src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-cubes.jpg"/>
+        <img id="sechelt-thumb" crossorigin="anonymous"
+             src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/thumb-sechelt.jpg"/>
+        <audio id="click-sound" crossorigin="anonymous"
+               src="https://cdn.aframe.io/360-image-gallery-boilerplate/audio/click.ogg"></audio>
+        <img id="cubes" crossorigin="anonymous"
+             src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/cubes.jpg"/>
+        <img id="sechelt" crossorigin="anonymous"
+             src="https://cdn.aframe.io/360-image-gallery-boilerplate/img/sechelt.jpg"/>
     </a-assets>
 
     <!-- 360-degree image. -->
-    <a-sky
-            id="image-360"
-            radius="50"
-            src="#casaPrincipal"
-            animation__fade="property: components.material.material.color; type: color; from: #FFF; to: #000; dur: 300; startEvents: fade"
-            animation__fadeback="property: components.material.material.color; type: color; from: #000; to: #FFF; dur: 300; startEvents: animationcomplete__fade"
+    <a-sky id="image-360" radius="50" src="#casaPrincipal"
+           animation__fade="property: components.material.material.color; type: color; from: #FFF; to: #000; dur: 300; startEvents: fade"
+           animation__fadeback="property: components.material.material.color; type: color; from: #000; to: #FFF; dur: 300; startEvents: animationcomplete__fade"
     ></a-sky>
 
     <!-- Image links. -->
-    <a-entity
-            template="src: #link"
-            data-src="#cubes"
-            data-thumb="#sombrero-thumb"
-            position="4.8 0 -0.5"
-            rotation="0 -80 0"
-            data-customw="1.5"
-            data-customh="1.5"
-    ></a-entity>
+    <a-entity template="src: #link" data-src="#cubes" data-thumb="#sombrero-thumb" position="4.8 0 -0.5"
+              rotation="0 -80 0" data-customw="1.5" data-customh="1.5"></a-entity>
 
-    <a-entity
-            id="myEnterVRButton"
-            onclick="goIn()"
+    <a-entity id="myEnterVRButton"
+            onclick="goInVR()"
             class="link"
             geometry="primitive: circle; radius: 0.06;"
             material="color: blue"
             position="0.5 1.5 -1.5"
     ></a-entity>
 
-    <a-entity
-            id="myEnterARButton"
-            onclick="goOut()"
+    <a-entity id="myEnterARButton"
+            onclick="goOutVR()"
             class="link"
             geometry="primitive: circle; radius: 0.06;"
             material="color: pink"
             position="1 1.5 -1.5"
     ></a-entity>
 
+    <button></button>
+
     <h1
             id="myEnterVRButton"
-            onclick="goIn()"
+            onclick="goInVR()"
             style="position: fixed; top: 10px;z-index: 99999999999999999999;"
     >
         VR
     </h1>
-    <a id="myEnterARButton" href="#"></a>
+
+
 
     <!--
   <a-entity id="links" layout="type: line; margin: 1.5" position="0 -1 -4">
@@ -166,23 +136,7 @@
     </a-entity>
 </a-scene>
 
-<script>
-    var scene = document.querySelector("a-scene");
-    var camera = document.getElementById("camera");
-    console.log(camera);
-
-    function goIn() {
-        scene.enterVR();
-        console.log("VR mode is " + scene.is("vr-mode"));
-        document.querySelector("#camera").object3D.position.set(0, 1.6, 0);
-    }
-
-    function goOut() {
-        scene.exitVR();
-        console.log("VR mode is " + scene.is("vr-mode"));
-        document.querySelector("#camera").object3D.position.set(0, 1.6, 0);
-    }
-</script>
+<script src="scripts/vrfunctions.js"></script>
 
 <!--<a-scene>
 <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
