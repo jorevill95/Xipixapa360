@@ -37,9 +37,9 @@
 </head>
 <body>
 
-<img class="viewModeBtn" src="assets/icons/menu/1x/vrmode.png" onclick="goInVR()">
+<img id="myEnterVRButton" class="viewModeBtn" src="assets/icons/menu/1x/vrmode.png" onclick="goInVR()"/>
 
-<a-scene vr-mode-ui="enabled: false">
+<a-scene vr-mode-ui="enterVRButton: #myEnterVRButton; enterARButton: #myEnterVRButton">
     <a-assets>
         <!--360 images (SKY)-->
         <img id="casaPrincipal" crossorigin="anonymous" src="assets/casaPrincipal.jpg"/>
@@ -63,61 +63,39 @@
     <!-- 360-degree image. -->
     <a-sky id="image-360" radius="50" src="#casaPrincipal"
            animation__fade="property: components.material.material.color; type: color; from: #FFF; to: #000; dur: 300; startEvents: fade"
-           animation__fadeback="property: components.material.material.color; type: color; from: #000; to: #FFF; dur: 300; startEvents: animationcomplete__fade"
-    ></a-sky>
+           animation__fadeback="property: components.material.material.color; type: color; from: #000; to: #FFF; dur: 300; startEvents: animationcomplete__fade"></a-sky>
 
     <!-- Image links. -->
-    <a-entity template="src: #link" data-src="#cubes" data-thumb="#sombrero-thumb" position="4.8 0 -0.5"
-              rotation="0 -80 0" data-customw="1.5" data-customh="1.5"></a-entity>
-
-    <a-entity id="myEnterVRButton"
-            onclick="goInVR()"
-            class="link"
-            geometry="primitive: circle; radius: 0.06;"
-            material="color: blue"
-            position="0.5 1.5 -1.5"
+    <a-entity template="src: #link"
+              data-src="#cubes"
+              data-thumb="#sombrero-thumb"
+              position="4.8 0 -0.5"
+              rotation="0 -80 0"
+              data-customw="1.5"
+              data-customh="1.5"
     ></a-entity>
-
-    <a-entity id="myEnterARButton"
-            onclick="goOutVR()"
-            class="link"
-            geometry="primitive: circle; radius: 0.06;"
-            material="color: pink"
-            position="1 1.5 -1.5"
-    ></a-entity>
-
-    <button></button>
-
-    <h1
-            id="myEnterVRButton"
-            onclick="goInVR()"
-            style="position: fixed; top: 10px;z-index: 99999999999999999999;"
-    >
-        VR
-    </h1>
-
 
 
     <!--
-  <a-entity id="links" layout="type: line; margin: 1.5" position="0 -1 -4">
-      <a-entity template="src: #link" data-src="#cubes" data-thumb="#cubes-thumb"></a-entity>
-      <a-entity template="src: #link" data-src="#casaPrincipal" data-thumb="#casaPrincipal-thumb"></a-entity>
-      <a-entity template="src: #link" data-src="#sechelt" data-thumb="#sechelt-thumb"></a-entity>
-  </a-entity>
+<a-entity id="links" layout="type: line; margin: 1.5" position="0 -1 -4">
+    <a-entity template="src: #link" data-src="#cubes" data-thumb="#cubes-thumb"></a-entity>
+    <a-entity template="src: #link" data-src="#casaPrincipal" data-thumb="#casaPrincipal-thumb"></a-entity>
+    <a-entity template="src: #link" data-src="#sechelt" data-thumb="#sechelt-thumb"></a-entity>
+</a-entity>
 -->
 
     <!-- Camera + cursor. -->
     <a-entity id="rig" position="0 0 0">
         <a-entity camera look-controls position="0 1.6 0" id="camera">
             <!--  <a-cursor
-                    id="cursor"
-                    cursor="fuse: true; fuseTimeout: 1500"
-                    color="white"
-                    geometry="primitive: ring; radiusOuter: 0.06; radiusInner: 0.05; thetaLength: 360; thetaStart: 90;"
-                    animation__fusing="property: geometry.thetaLength; startEvents: fusing; dur: 1500; from: 0; to: 360; pauseEvents: mouseleave"
-                    event-set__mouseenter="_event: mouseenter; color: #ffc107"
-                    event-set__mouseleave="_event: mouseleave; color: white; geometry.thetaLength: 360"
-                    raycaster="objects: .link"></a-cursor>-->
+                      id="cursor"
+                      cursor="fuse: true; fuseTimeout: 1500"
+                      color="white"
+                      geometry="primitive: ring; radiusOuter: 0.06; radiusInner: 0.05; thetaLength: 360; thetaStart: 90;"
+                      animation__fusing="property: geometry.thetaLength; startEvents: fusing; dur: 1500; from: 0; to: 360; pauseEvents: mouseleave"
+                      event-set__mouseenter="_event: mouseenter; color: #ffc107"
+                      event-set__mouseleave="_event: mouseleave; color: white; geometry.thetaLength: 360"
+                      raycaster="objects: .link"></a-cursor>-->
             <a-cursor
                     id="cursor"
                     cursor="fuse: true; fuseTimeout: 1500"
